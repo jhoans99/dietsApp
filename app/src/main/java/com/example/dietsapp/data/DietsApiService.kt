@@ -8,7 +8,7 @@ import retrofit2.http.Query
 interface DietsApiService {
 
     @GET("recipes/complexSearch")
-    fun getRecipesInformation(
+    suspend fun getRecipesInformation(
         @Query("apiKey") apiKey: String = "1546be6d60b141b59478bd7b0825d4be"
     ): Response<RecipesInformationDTO>
 }

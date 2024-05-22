@@ -1,5 +1,7 @@
+package com.example.dietsapp
+
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class DietsApp: Application()
+open class DietsApp: Application()

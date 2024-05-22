@@ -7,7 +7,7 @@ class DietsRepository @Inject constructor(
     private val dietsApiService: DietsApiService
 ) {
 
-    fun getRecipesInformation(): ArrayList<ResultData>? {
+    suspend fun getRecipesInformation(): ArrayList<ResultData>? {
         return dietsApiService.getRecipesInformation().body()?.results
     }
 }

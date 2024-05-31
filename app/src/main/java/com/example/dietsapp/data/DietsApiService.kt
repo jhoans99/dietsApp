@@ -11,5 +11,8 @@ interface DietsApiService {
     suspend fun getRecipesInformation(
         @Query("apiKey") apiKey: String = "1546be6d60b141b59478bd7b0825d4be"
     ): Response<RecipesInformationDTO>
+
+    @GET("")
+    suspend fun getDetailsRecipes()
 }
 

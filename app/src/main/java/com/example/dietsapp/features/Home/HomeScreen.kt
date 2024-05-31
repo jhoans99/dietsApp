@@ -1,5 +1,6 @@
 package com.example.dietsapp.features.Home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,11 +19,13 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.dietsapp.data.model.response.ResultData
 
 @Composable
 fun HomeScreen(
+    navController: NavController,
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     val uiState = homeViewModel.uiState.collectAsState()
@@ -38,7 +41,9 @@ fun HomeScreen(
               Text(text = "Prueba de recetas")
               LazyColumn {
                   items(uiState.value.listRecipes) {
-                      RecipesItem(item = it)
+                      RecipesItem(item = it) { id ->
+                          navController.navigate("detailsDiets/$id")
+                      }
                   }
               }
           }
@@ -46,9 +51,19 @@ fun HomeScreen(
 }
 
 @Composable
-fun RecipesItem(item: ResultData) {
+fun RecipesItem(
+    item: ResultData,
+    itemSelected: (String) -> Unit
+) {
     Column(
-        modifier = Modifier.fillMaxWidth().padding(10.dp),
+        modifier =
+        Modifier
+            .fillMaxWidth()
+            .padding(10.dp)
+            .clickable {
+                itemSelected(item.id.toString())
+            }
+        ,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
